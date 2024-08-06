@@ -2,7 +2,7 @@ require("dotenv").config();
 import express, { NextFunction, Request, Response } from "express";
 export const app = express();
 import cors from "cors";
-
+import path from 'path';
 import cookieParser from "cookie-parser";
 import { ErrorMiddleware } from "./middleware/error";
 import userRouter from "./routes/user.route";
@@ -14,6 +14,10 @@ import layoutRouter from "./routes/layout.route";
 import { rateLimit } from 'express-rate-limit'
 import fileUpload from 'express-fileupload';
 
+//path
+const _dirname = path.dirname("");
+const buildpath = path.join(_dirname, "../client/.next");
+app.use(express.static(buildpath));
 // body parser
 app.use(express.json({ limit: "50mb" }));
 
