@@ -522,6 +522,9 @@ exports.AddQuestToSubject = (0, catchAsyncErrors_1.CatchAsyncError)(async (req, 
         if (questionImage) {
             const result = await cloudinary_1.default.v2.uploader.upload(questionImage.tempFilePath, {
                 folder: 'questions',
+                transformation: [
+                    { width: 800, height: 600, crop: 'limit', quality: 'auto', format: 'auto', }, // Optimize image size and quality
+                ],
             });
             questionImageUrl = result.secure_url;
             questionImagePublicId = result.public_id;
@@ -531,6 +534,9 @@ exports.AddQuestToSubject = (0, catchAsyncErrors_1.CatchAsyncError)(async (req, 
         if (answerImage) {
             const result = await cloudinary_1.default.v2.uploader.upload(answerImage.tempFilePath, {
                 folder: 'answers',
+                transformation: [
+                    { width: 800, height: 600, crop: 'limit', quality: 'auto', format: 'auto', }, // Optimize image size and quality
+                ],
             });
             answerImageUrl = result.secure_url;
             answerImagePublicId = result.public_id;

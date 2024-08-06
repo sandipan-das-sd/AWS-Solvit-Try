@@ -8,6 +8,7 @@ require("dotenv").config();
 const express_1 = __importDefault(require("express"));
 exports.app = (0, express_1.default)();
 const cors_1 = __importDefault(require("cors"));
+const path_1 = __importDefault(require("path"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const error_1 = require("./middleware/error");
 const user_route_1 = __importDefault(require("./routes/user.route"));
@@ -18,6 +19,10 @@ const analytics_route_1 = __importDefault(require("./routes/analytics.route"));
 const layout_route_1 = __importDefault(require("./routes/layout.route"));
 const express_rate_limit_1 = require("express-rate-limit");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
+//path
+const _dirname = path_1.default.dirname("");
+const buildpath = path_1.default.join(_dirname, "../client/.next");
+exports.app.use(express_1.default.static(buildpath));
 // body parser
 exports.app.use(express_1.default.json({ limit: "50mb" }));
 // cookie parser
